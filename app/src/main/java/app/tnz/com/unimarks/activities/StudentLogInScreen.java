@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
 import app.tnz.com.unimarks.R;
 import app.tnz.com.unimarks.activities.fragments.MainActivity;
 import app.tnz.com.unimarks.configurations.utils.app.App;
@@ -18,6 +20,7 @@ import app.tnz.com.unimarks.repositories.student.StudentAccountRepository;
 import app.tnz.com.unimarks.repositories.student.StudentProfileRepository;
 import app.tnz.com.unimarks.repositories.student.impl.StudentAccountRepositoryImpl;
 import app.tnz.com.unimarks.repositories.student.impl.StudentProfileRepositoryImpl;
+import app.tnz.com.unimarks.services.student.LoginInService;
 
 /**
  * Created by Admin on 2016/08/29.
@@ -55,9 +58,17 @@ public class StudentLogInScreen extends AppCompatActivity {
 
         Long id  = studentAccountRepository.find_by_details(studEmail, studPass);
 
+        StudentAccount studentAccount = null;
+
+        try {
+            studentAccount = new LoginInService().execute(id).get();
+        } catch (Exception e) {
+            id = null;
+        }
+
         if (id != null) {
 
-            StudentAccount studentAccount = studentAccountRepository.find_by_id(id);
+            //studentAccount = studentAccountRepository.find_by_id(id);
 
             studentProfileRepository = new StudentProfileRepositoryImpl(App.getAppContext());
             StudentProfile studentProfile = studentProfileRepository.find_by_id(id);

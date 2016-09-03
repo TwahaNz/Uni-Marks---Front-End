@@ -3,9 +3,7 @@ package app.tnz.com.unimarks.restapi.student.impl;
 import com.google.gson.Gson;
 
 import app.tnz.com.unimarks.configurations.utils.app.AppUtil;
-import app.tnz.com.unimarks.domain.student.StudentAccount;
 import app.tnz.com.unimarks.domain.student.StudentProfile;
-import app.tnz.com.unimarks.factories.student.StudentAccountFactory;
 import app.tnz.com.unimarks.factories.student.StudentProfileFactory;
 import app.tnz.com.unimarks.restapi.student.StudentProfileActivateAPI;
 import okhttp3.Request;
@@ -17,8 +15,7 @@ import okhttp3.Response;
  */
 public class StudenProfileActivateAPIImpl implements StudentProfileActivateAPI {
 
-    private static final String url = AppUtil.getBaserURI() + "com/tnz/app/exam4me/account/profile";
-
+    private String url = AppUtil.getBaserURI() + "com/tnz/app/exam4me/account/profile";
 
     @Override
     public boolean isValidStudentProfile(String name, String surname) {
@@ -60,5 +57,61 @@ public class StudenProfileActivateAPIImpl implements StudentProfileActivateAPI {
         }
 
         return StudentProfileFactory.getStudentProfile(studAccount.getId(), studAccount.getName(), studAccount.getSurname());
+    }
+
+    @Override
+    public StudentProfile updateStudentProfile(Long id, String name, String email) throws Exception {
+
+        url = AppUtil.getBaserURI() + "studentProfile/";
+
+        StudentProfile studentProfile = StudentProfileFactory.getStudentProfile(id, name, email);
+
+        String json = new Gson().toJson(studentProfile);
+
+        RequestBody body = RequestBody.create(AppUtil.getJSONMediaType(), json);
+
+        Request request = new Request.Builder()
+                .url(url)
+                .put(body)
+                .build();
+
+        Response response = AppUtil.getConnection()
+                .newCall(request)
+                .execute();
+
+        String value = response.body().string();
+
+        studentProfile= new Gson().fromJson(value, StudentProfile.class);
+
+        if(!isValidStudentProfile(studentProfile.getName(), studentProfile.getSurname())) {
+            return null;
+        }
+
+        return StudentProfileFactory.getStudentProfile(studentProfile.getId(), studentProfile.getName(), studentProfile.getSurname());
+    }
+
+    @Override
+    public StudentProfile deleteStudentProfile(Long id, String studName, String studSurname) throws Exception {
+
+        url = AppUtil.getBaserURI() + "studentProfile/";
+
+        Request request = new Request.Builder()
+                .url(url + id)
+                .delete()
+                .build();
+
+        Response response = AppUtil.getConnection()
+                .newCall(request)
+                .execute();
+
+        String value = response.body().string();
+
+        StudentProfile studentProfile = new Gson().fromJson(value, StudentProfile.class);
+
+        if(!isValidStudentProfile(studentProfile.getName(), studentProfile.getSurname())) {
+            return null;
+        }
+
+        return StudentProfileFactory.getStudentProfile(studentProfile.getId(), studentProfile.getName(), studentProfile.getSurname());
     }
 }

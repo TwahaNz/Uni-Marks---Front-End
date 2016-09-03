@@ -30,4 +30,5 @@ public class Student implements Serializable {
     public void setProfile(StudentProfile profile) {
         this.studentProfile = profile;
     }
+
 }

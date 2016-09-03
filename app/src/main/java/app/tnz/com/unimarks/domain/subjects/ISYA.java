@@ -15,6 +15,9 @@ public class ISYA implements Serializable {
     private String term3;
     private String term4;
 
+    public ISYA() {
+    }
+
     public ISYA(String studentNumber, String term1, String term2, String term3, String term4) {
         this.studentNumber = studentNumber;
         this.term1 = term1;

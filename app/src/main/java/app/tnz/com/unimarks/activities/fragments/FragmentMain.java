@@ -96,8 +96,9 @@ public class FragmentMain extends Fragment {
             switch (position) {
                 case 0:
                     dos = new DOSMarksService().execute(studentNumber).get();
-                    startActivity(new Intent(App.getAppContext(), DOSActivity.class)
-                            .putExtra("dos", dos));
+                    Intent intent =  new Intent(getContext(), DOSActivity.class);
+                    intent.putExtra("dos", dos);
+                    startActivity(intent);
                     return;
                 case 1:
                     isyb = new ISYBMarksService().execute(studentNumber).get();

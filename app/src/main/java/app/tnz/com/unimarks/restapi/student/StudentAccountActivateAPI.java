@@ -10,4 +10,10 @@ public interface StudentAccountActivateAPI {
     boolean isValidStudentAccount(String email, String password);
 
     StudentAccount activateStudentAccount(String email, String password) throws Exception;
+
+    StudentAccount loginStudentAccount(Long id) throws Exception;
+
+    StudentAccount updateStudentAccount(Long id, String email, String password) throws Exception;
+
+    StudentAccount deleteStudentAccount(Long id, String studEmail, String studPassword) throws Exception;
 }

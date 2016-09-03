@@ -22,7 +22,9 @@ import app.tnz.com.unimarks.repositories.student.StudentAccountRepository;
 import app.tnz.com.unimarks.repositories.student.StudentProfileRepository;
 import app.tnz.com.unimarks.repositories.student.impl.StudentAccountRepositoryImpl;
 import app.tnz.com.unimarks.repositories.student.impl.StudentProfileRepositoryImpl;
+import app.tnz.com.unimarks.services.student.StudentDeleteService;
 import app.tnz.com.unimarks.services.student.StudentRegisterService;
+import app.tnz.com.unimarks.services.student.StudentUpdateService;
 
 
 public class FragmentSub extends Fragment {
@@ -48,14 +50,13 @@ public class FragmentSub extends Fragment {
         setStudentDetails(view);
         disableAllFields();
 
-        Button edit = (Button) view.findViewById(R.id.btn_edit);
+        Button delete = (Button) view.findViewById(R.id.btn_delete);
         Button update = (Button) view.findViewById(R.id.btn_update);
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enableAllFields();
-                Toast.makeText(App.getAppContext(), "Editing Coming Soon!", Toast.LENGTH_SHORT).show();
+                deleteStudent();
             }
         });
 
@@ -64,7 +65,7 @@ public class FragmentSub extends Fragment {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setStudentDetails(viewFinal);
+                setNewStudentDetails(viewFinal);
                 Toast.makeText(App.getAppContext(), "Successfully Updated Your Details", Toast.LENGTH_SHORT).show();
                 disableAllFields();
             }
@@ -76,9 +77,13 @@ public class FragmentSub extends Fragment {
 
     private void updateDetails() {
 
-        /*try {
+        Student upStudent = student;
 
-            Student student = new StudentUpdateService().execute(studEmail, studPassword, studName, studSurname).get();
+        try {
+
+            Student student = new StudentUpdateService().execute(String.valueOf(upStudent.getStudentAccount().getId()), upStudent.getStudentProfile().getName(),
+                    upStudent.getStudentProfile().getSurname(), upStudent.getStudentAccount().getStudentEmail(), upStudent.getStudentAccount().getStudentPassword())
+                    .get();
 
             if (student != null) {
 
@@ -88,15 +93,44 @@ public class FragmentSub extends Fragment {
                 studentProfileRepository = new StudentProfileRepositoryImpl(App.getAppContext());
                 studentProfileRepository.update(student.getStudentProfile());
 
-                Toast.makeText(App.getAppContext(), "Account Successfully Created", Toast.LENGTH_LONG).show();
+                Toast.makeText(App.getAppContext(), "Account Successfully Updated", Toast.LENGTH_LONG).show();
 
             } else {
-                Toast.makeText(App.getAppContext(), "Account Was Not Created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(App.getAppContext(), "Account Was Not Updated", Toast.LENGTH_SHORT).show();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
+    }
+
+    private void deleteStudent() {
+
+        Student upStudent = student;
+
+        try {
+
+            Student student = new StudentDeleteService().execute(String.valueOf(upStudent.getStudentAccount().getId()), upStudent.getStudentProfile().getName(),
+                    upStudent.getStudentProfile().getSurname(), upStudent.getStudentAccount().getStudentEmail(), upStudent.getStudentAccount().getStudentPassword())
+                    .get();
+
+            if (student != null) {
+
+                /*studentAccountRepository = new StudentAccountRepositoryImpl(App.getAppContext());
+                studentAccountRepository.update(student.getStudentAccount());
+
+                studentProfileRepository = new StudentProfileRepositoryImpl(App.getAppContext());
+                studentProfileRepository.update(student.getStudentProfile());*/
+
+                Toast.makeText(App.getAppContext(), "Account Successfully Deleted", Toast.LENGTH_LONG).show();
+
+            } else {
+                Toast.makeText(App.getAppContext(), "Account Was Not Deleted", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void setStudentDetails(View view) {
@@ -114,11 +148,20 @@ public class FragmentSub extends Fragment {
         studentDetails[3].setText(student.getStudentAccount().getStudentPassword());
     }
 
+    private void setNewStudentDetails(View view) {
+
+        studentDetails[0] = (EditText) view.findViewById(R.id.editName);
+        studentDetails[0].setText(studentDetails[0].getText());
+
+        studentDetails[1] = (EditText) view.findViewById(R.id.editSurname);
+        studentDetails[1].setText(studentDetails[1].getText());
+
+        studentDetails[3] = (EditText) view.findViewById(R.id.editPassword);
+        studentDetails[3].setText(studentDetails[2].getText());
+    }
+
     private void disableAllFields(){
-        studentDetails[0].setFocusable(false);
-        studentDetails[1].setFocusable(false);
         studentDetails[2].setFocusable(false);
-        studentDetails[3].setFocusable(false);
     }
 
     private void enableAllFields(){

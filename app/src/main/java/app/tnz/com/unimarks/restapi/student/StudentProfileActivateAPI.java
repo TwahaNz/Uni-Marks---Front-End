@@ -10,4 +10,8 @@ public interface StudentProfileActivateAPI {
     boolean isValidStudentProfile(String name, String surname);
 
     StudentProfile activateStudentAccount(String name, String suraname) throws Exception;
+
+    StudentProfile updateStudentProfile(Long id, String studName, String studSurname) throws Exception;
+
+    StudentProfile deleteStudentProfile(Long id, String studName, String studSurname) throws Exception;
 }
