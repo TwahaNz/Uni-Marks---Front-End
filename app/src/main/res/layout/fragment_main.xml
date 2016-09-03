@@ -1,0 +1,55 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="app.tnz.com.unimarks.activities.fragments.FragmentMain">
+
+    <TextView
+        android:text="\n Please Select A Subject To View Your Marks \n"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="60dp"
+        android:gravity="bottom">
+
+        <ImageView
+            android:id="@+id/imgFooter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cput_footer"
+            android:background="#003e6b"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:text="@string/footer_descr"
+            android:textSize="9sp"
+            android:textColor="#0099FF"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#003e6b"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

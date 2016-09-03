@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    tools:context="app.tnz.com.unimarks.activities.StudentLogInScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:baselineAligned="true"
+        android:id="@+id/linearLayout">
+
+        <ImageView
+            android:id="@+id/imgCputLogo"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:src="@drawable/cput_logo"
+            android:contentDescription="@string/app_name"
+            android:background="#ffffff"
+            android:layout_marginBottom="10dp"/>
+
+        <GridLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:rowCount="2">
+
+            <TextView
+                android:text="Email: "
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+
+            <EditText
+                android:id="@+id/username"
+                android:maxLength="18"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:text="Password:"
+                android:textSize="18sp"
+                android:lines="1"
+                android:paddingTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+
+            <EditText
+                android:id="@+id/password"
+                android:inputType="textPassword"
+                android:maxLength="13"
+                android:lines="1"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                />
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="80dp"
+            android:gravity="center">
+
+            <Button
+                android:text="Login"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="40dp"
+                android:textColor="@android:color/white"
+                android:background="@android:drawable/bottom_bar"
+                android:onClick="btn_login"/>
+
+            <Button
+                android:text="Register"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@android:color/white"
+                android:background="@android:drawable/bottom_bar"
+                android:onClick="btn_register"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/imgFooter"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:src="@drawable/cput_footer"
+            android:paddingBottom="80dp"
+            android:background="#003e6b"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:text="@string/footer_descr"
+            android:textSize="9sp"
+            android:textColor="#0099FF"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#003e6b"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

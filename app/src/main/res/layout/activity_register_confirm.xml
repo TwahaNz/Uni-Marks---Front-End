@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true">
+
+    <ImageView
+        android:id="@+id/imgCputLogo"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:src="@drawable/cput_logo"
+        android:contentDescription="@string/app_name"
+        android:background="#ffffff"/>
+
+    <TableLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="true"
+            android:divider="@color/abc_input_method_navigation_guard"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/abc_color_highlight_material">
+
+            <TextView
+                android:text="Name:"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#1d54ad" />
+
+            <TextView
+                android:id="@+id/prestudName"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:divider="@color/abc_input_method_navigation_guard">
+
+            <TextView
+                android:text="Surname:"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/prestudSurname"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:divider="@color/abc_input_method_navigation_guard">
+
+            <TextView
+                android:text="Student Email:"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/common_signin_btn_default_background"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/prestudEmail"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard"
+                android:layout_weight="10"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp"
+            android:divider="@color/abc_input_method_navigation_guard">
+
+            <TextView
+                android:text="Password:"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_deep_teal_500" />
+
+            <TextView
+                android:id="@+id/prestudPassword"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp">
+
+            <Button
+                android:text="Back"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@android:color/white"
+                android:background="@android:drawable/bottom_bar"
+                android:layout_marginRight="60dp"
+                android:onClick="btn_back"/>
+
+            <Button
+                android:text="Submit"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@android:color/white"
+                android:background="@android:drawable/bottom_bar"
+                android:onClick="btn_submit"
+                />
+        </TableRow>
+    </TableLayout>
+
+
+</LinearLayout>

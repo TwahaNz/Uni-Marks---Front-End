@@ -1,0 +1,133 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@android:color/white"
+    tools:context="app.tnz.com.unimarks.activities.fragments.FragmentSub">
+
+    <ImageView
+        android:id="@+id/imgCputLogo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:src="@drawable/cput_logo"
+        android:contentDescription="@string/app_name"
+        android:background="#ffffff" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:text="Name:"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#1d54ad" />
+
+            <EditText
+                android:id="@+id/editName"
+                android:textSize="20sp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:text="Surname:"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/editSurname"
+                android:textSize="20sp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:text="Email:"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/common_signin_btn_default_background" />
+
+            <EditText
+                android:id="@+id/editEmail"
+                android:inputType="textEmailAddress"
+                android:textSize="20sp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:text="Password:"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/material_deep_teal_500" />
+
+            <EditText
+                android:id="@+id/editPassword"
+                android:textSize="20sp"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/abc_input_method_navigation_guard" />
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:text="Edit"
+            android:id="@+id/btn_edit"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:background="@android:drawable/bottom_bar"
+            android:layout_marginRight="80dp"
+            android:onClick="btn_edit"/>
+
+        <Button
+            android:text="Update"
+            android:id="@+id/btn_update"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:textColor="@android:color/white"
+            android:background="@android:drawable/bottom_bar"
+            android:onClick="btn_update"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
