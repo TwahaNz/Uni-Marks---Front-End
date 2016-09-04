@@ -9,9 +9,9 @@ import java.io.Serializable;
  */
 public class StudentAccount implements Serializable {
 
+    private long id;
     private String studentEmail;
     private String studentPassword;
-    private long id;
 
     private StudentAccount(){}
 

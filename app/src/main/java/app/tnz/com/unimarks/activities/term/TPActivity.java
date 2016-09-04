@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import app.tnz.com.unimarks.R;
-import app.tnz.com.unimarks.domain.marks.Term;
-import app.tnz.com.unimarks.domain.subjects.DOS;
+import app.tnz.com.unimarks.configurations.utils.app.App;
 import app.tnz.com.unimarks.domain.subjects.TP;
 
 /**
@@ -23,19 +23,24 @@ public class TPActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        TP tp = (TP) getIntent().getSerializableExtra("tp");
+        try{
+            TP tp = (TP) getIntent().getSerializableExtra("tp");
 
-        textViews = new TextView[4];
+            textViews = new TextView[4];
 
-        textViews[0] = (TextView) findViewById(R.id.term1);
-        textViews[1] = (TextView) findViewById(R.id.term2);
-        textViews[2] = (TextView) findViewById(R.id.term3);
-        textViews[3] = (TextView) findViewById(R.id.term4);
+            textViews[0] = (TextView) findViewById(R.id.term1);
+            textViews[1] = (TextView) findViewById(R.id.term2);
+            textViews[2] = (TextView) findViewById(R.id.term3);
+            textViews[3] = (TextView) findViewById(R.id.term4);
 
-        textViews[0].setText(tp.getTerm1());
-        textViews[1].setText(tp.getTerm2());
-        textViews[2].setText(tp.getTerm3());
-        textViews[3].setText(tp.getTerm4());
+            textViews[0].setText(tp.getTerm1());
+            textViews[1].setText(tp.getTerm2());
+            textViews[2].setText(tp.getTerm3());
+            textViews[3].setText(tp.getTerm4());
+        } catch (Exception e){
+            Toast.makeText(App.getAppContext(), "\n Please check your internet settings \n", Toast.LENGTH_SHORT).show();
+            finish();;
+        }
 
     }
 }

@@ -15,7 +15,7 @@ import okhttp3.Response;
  */
 public class ISYBAPIImpl implements ISYBAPI {
 
-    private static final String url = AppUtil.getBaserURI() + "student/irp/";
+    private static final String url = AppUtil.getBaserURI() + "student/isyb/";
 
     @Override
     public ISYB getDOSMarks(String studentNumber) throws Exception {

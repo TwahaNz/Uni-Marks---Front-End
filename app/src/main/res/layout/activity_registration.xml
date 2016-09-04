@@ -86,7 +86,7 @@
             <EditText
                 android:id="@+id/studEmail"
                 android:inputType="textEmailAddress"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/abc_input_method_navigation_guard" />

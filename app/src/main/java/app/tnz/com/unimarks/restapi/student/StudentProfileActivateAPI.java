@@ -11,7 +11,9 @@ public interface StudentProfileActivateAPI {
 
     StudentProfile activateStudentAccount(String name, String suraname) throws Exception;
 
-    StudentProfile updateStudentProfile(Long id, String studName, String studSurname) throws Exception;
+    StudentProfile loginStudentProfile(Long id) throws Exception;
 
-    StudentProfile deleteStudentProfile(Long id, String studName, String studSurname) throws Exception;
+    StudentProfile updateStudentProfile(StudentProfile studentProfile) throws Exception;
+
+    StudentProfile deleteStudentProfile(Long id) throws Exception;
 }

@@ -25,17 +25,13 @@ public class StudentDeleteService extends AsyncTask<String, Void, Student> {
 
         try {
 
-            String studEmail = params[0];
-            String studPassword = params[1];
-            String studName = params[2];
-            String studSurname = params[3];
-            Long id = Long.valueOf(params[4]);
+            Long id = Long.valueOf(params[0]);
 
             studentAccountActivate = new StudentAccountActivateAPIImpl();
-            StudentAccount studentAccount = studentAccountActivate.deleteStudentAccount(id, studEmail, studPassword);
+            StudentAccount studentAccount = studentAccountActivate.deleteStudentAccount(id);
 
             studentProfileActivate = new StudenProfileActivateAPIImpl();
-            StudentProfile studentProfile = studentProfileActivate.deleteStudentProfile(id, studName, studSurname);
+            StudentProfile studentProfile = studentProfileActivate.deleteStudentProfile(id);
 
             student = new Student(studentAccount, studentProfile);
 

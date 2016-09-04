@@ -54,26 +54,22 @@ public class StudentLogInScreen extends AppCompatActivity {
         String studEmail = email.getText().toString();
         String studPass = password.getText().toString();
 
-        studentAccountRepository = new StudentAccountRepositoryImpl(App.getAppContext());
-
-        Long id  = studentAccountRepository.find_by_details(studEmail, studPass);
-
-        StudentAccount studentAccount = null;
+        Student student = null;
 
         try {
-            studentAccount = new LoginInService().execute(id).get();
+            student = new LoginInService().execute(studEmail, studPass).get();
         } catch (Exception e) {
-            id = null;
+            Toast.makeText(StudentLogInScreen.this, "\n Unable To Connect. Please check your internet connection \n", Toast.LENGTH_SHORT).show();
         }
 
-        if (id != null) {
+        if (student != null) {
 
-            //studentAccount = studentAccountRepository.find_by_id(id);
+            studentAccountRepository = new StudentAccountRepositoryImpl(App.getAppContext());
+            studentAccountRepository.insert(student.getStudentAccount());
 
             studentProfileRepository = new StudentProfileRepositoryImpl(App.getAppContext());
-            StudentProfile studentProfile = studentProfileRepository.find_by_id(id);
+            StudentProfile studentProfile = studentProfileRepository.insert(student.getStudentProfile());
 
-            Student student = new Student(studentAccount, studentProfile);
 
             Intent intent = new Intent(StudentLogInScreen.this, MainActivity.class);
 

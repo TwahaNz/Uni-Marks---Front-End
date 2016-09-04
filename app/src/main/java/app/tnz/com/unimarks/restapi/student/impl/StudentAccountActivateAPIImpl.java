@@ -3,7 +3,6 @@ package app.tnz.com.unimarks.restapi.student.impl;
 import com.google.gson.Gson;
 
 import app.tnz.com.unimarks.configurations.utils.app.AppUtil;
-import app.tnz.com.unimarks.domain.student.Student;
 import app.tnz.com.unimarks.domain.student.StudentAccount;
 import app.tnz.com.unimarks.factories.student.StudentAccountFactory;
 import app.tnz.com.unimarks.restapi.student.StudentAccountActivateAPI;
@@ -61,35 +60,45 @@ public class StudentAccountActivateAPIImpl implements StudentAccountActivateAPI 
     }
 
     @Override
-    public StudentAccount loginStudentAccount(Long id) throws Exception {
-
-            Request request = new Request.Builder()
-                    .url(url + "" + id)
-                    .get()
-                    .build();
-
-            Response response = AppUtil.getConnection()
-                    .newCall(request)
-                    .execute();
-
-            String value = response.body().string();
-
-        return new Gson().fromJson(value, StudentAccount.class);
-    }
-
-    @Override
-    public StudentAccount updateStudentAccount(Long id, String email, String password) throws Exception {
+    public StudentAccount loginStudentAccount(StudentAccount studentAccount) throws Exception {
 
         url = AppUtil.getBaserURI() + "studentAccount/";
 
-        StudentAccount studAccount = StudentAccountFactory.getStudent(id, email, password);
-
-        String json = new Gson().toJson(studAccount);
+        String json = new Gson().toJson(studentAccount);
 
         RequestBody body = RequestBody.create(AppUtil.getJSONMediaType(), json);
 
         Request request = new Request.Builder()
                 .url(url)
+                .post(body)
+                .build();
+
+        Response response = AppUtil.getConnection()
+                .newCall(request)
+                .execute();
+
+        String value = response.body().string();
+
+        studentAccount = new Gson().fromJson(value, StudentAccount.class);
+
+        if (!isValidStudentAccount(studentAccount.getStudentEmail(), studentAccount.getStudentPassword())) {
+            return null;
+        }
+
+        return studentAccount;
+    }
+
+    @Override
+    public StudentAccount updateStudentAccount(StudentAccount studentAccount) throws Exception {
+
+        url = AppUtil.getBaserURI() + "studentAccount/";
+
+        String json = new Gson().toJson(studentAccount);
+
+        RequestBody body = RequestBody.create(AppUtil.getJSONMediaType(), json);
+
+        Request request = new Request.Builder()
+                .url(url + studentAccount.getId())
                 .put(body)
                 .build();
 
@@ -99,17 +108,17 @@ public class StudentAccountActivateAPIImpl implements StudentAccountActivateAPI 
 
         String value = response.body().string();
 
-        studAccount = new Gson().fromJson(value, StudentAccount.class);
+        studentAccount = new Gson().fromJson(value, StudentAccount.class);
 
-        if(!isValidStudentAccount(studAccount.getStudentEmail(), studAccount.getStudentPassword())) {
+        if(!isValidStudentAccount(studentAccount.getStudentEmail(), studentAccount.getStudentPassword())) {
             return null;
         }
 
-        return StudentAccountFactory.getStudent(studAccount.getId(), studAccount.getStudentEmail(), studAccount.getStudentPassword());
+        return StudentAccountFactory.getStudent(studentAccount.getId(), studentAccount.getStudentEmail(), studentAccount.getStudentPassword());
     }
 
     @Override
-    public StudentAccount deleteStudentAccount(Long id, String studEmail, String studPassword) throws Exception {
+    public StudentAccount deleteStudentAccount(Long id) throws Exception {
 
         url = AppUtil.getBaserURI() + "studentAccount/";
 

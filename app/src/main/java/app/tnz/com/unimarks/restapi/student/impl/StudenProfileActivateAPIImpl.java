@@ -3,6 +3,7 @@ package app.tnz.com.unimarks.restapi.student.impl;
 import com.google.gson.Gson;
 
 import app.tnz.com.unimarks.configurations.utils.app.AppUtil;
+import app.tnz.com.unimarks.domain.student.StudentAccount;
 import app.tnz.com.unimarks.domain.student.StudentProfile;
 import app.tnz.com.unimarks.factories.student.StudentProfileFactory;
 import app.tnz.com.unimarks.restapi.student.StudentProfileActivateAPI;
@@ -50,28 +51,51 @@ public class StudenProfileActivateAPIImpl implements StudentProfileActivateAPI {
 
         String value = response.body().string();
 
-        StudentProfile studAccount = new Gson().fromJson(value, StudentProfile.class);
+        studentProfile = new Gson().fromJson(value, StudentProfile.class);
 
         if(!isValidStudentProfile(studentProfile.getName(), studentProfile.getSurname())) {
             return null;
         }
 
-        return StudentProfileFactory.getStudentProfile(studAccount.getId(), studAccount.getName(), studAccount.getSurname());
+        return StudentProfileFactory.getStudentProfile(studentProfile.getId(), studentProfile.getName(), studentProfile.getSurname());
     }
 
     @Override
-    public StudentProfile updateStudentProfile(Long id, String name, String email) throws Exception {
+    public StudentProfile loginStudentProfile(Long id) throws Exception {
 
         url = AppUtil.getBaserURI() + "studentProfile/";
 
-        StudentProfile studentProfile = StudentProfileFactory.getStudentProfile(id, name, email);
+        Request request = new Request.Builder()
+                .url(url + id)
+                .get()
+                .build();
+
+        Response response = AppUtil.getConnection()
+                .newCall(request)
+                .execute();
+
+        String value = response.body().string();
+
+        StudentProfile studProfile = new Gson().fromJson(value, StudentProfile.class);
+
+        if (!isValidStudentProfile(studProfile.getName(), studProfile.getSurname())) {
+            return null;
+        }
+
+        return StudentProfileFactory.getStudentProfile(studProfile.getId(), studProfile.getName(), studProfile.getSurname());
+    }
+
+    @Override
+    public StudentProfile updateStudentProfile(StudentProfile studentProfile) throws Exception {
+
+        url = AppUtil.getBaserURI() + "studentProfile/";
 
         String json = new Gson().toJson(studentProfile);
 
         RequestBody body = RequestBody.create(AppUtil.getJSONMediaType(), json);
 
         Request request = new Request.Builder()
-                .url(url)
+                .url(url + studentProfile.getId())
                 .put(body)
                 .build();
 
@@ -91,7 +115,7 @@ public class StudenProfileActivateAPIImpl implements StudentProfileActivateAPI {
     }
 
     @Override
-    public StudentProfile deleteStudentProfile(Long id, String studName, String studSurname) throws Exception {
+    public StudentProfile deleteStudentProfile(Long id) throws Exception {
 
         url = AppUtil.getBaserURI() + "studentProfile/";
 

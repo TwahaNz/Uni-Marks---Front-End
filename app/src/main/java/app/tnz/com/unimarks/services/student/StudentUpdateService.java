@@ -13,7 +13,7 @@ import app.tnz.com.unimarks.restapi.student.impl.StudentAccountActivateAPIImpl;
 /**
  * Created by Admin on 2016/09/03.
  */
-public class StudentUpdateService extends AsyncTask<String, Void, Student> {
+public class StudentUpdateService extends AsyncTask<Student, Void, Student> {
 
     private StudentAccountActivateAPI studentAccountActivate;
     private StudentProfileActivateAPI studentProfileActivate;
@@ -21,21 +21,17 @@ public class StudentUpdateService extends AsyncTask<String, Void, Student> {
     private Student student;
 
     @Override
-    protected Student doInBackground(String... params) {
+    protected Student doInBackground(Student... params) {
 
         try {
 
-            String studEmail = params[0];
-            String studPassword = params[1];
-            String studName = params[2];
-            String studSurname = params[3];
-            Long id = Long.valueOf(params[4]);
+            student = params[0];
 
             studentAccountActivate = new StudentAccountActivateAPIImpl();
-            StudentAccount studentAccount = studentAccountActivate.updateStudentAccount(id, studEmail, studPassword);
+            StudentAccount studentAccount = studentAccountActivate.updateStudentAccount(student.getStudentAccount());
 
             studentProfileActivate = new StudenProfileActivateAPIImpl();
-            StudentProfile studentProfile = studentProfileActivate.updateStudentProfile(id, studName, studSurname);
+            StudentProfile studentProfile = studentProfileActivate.updateStudentProfile(student.getStudentProfile());
 
             student = new Student(studentAccount, studentProfile);
 

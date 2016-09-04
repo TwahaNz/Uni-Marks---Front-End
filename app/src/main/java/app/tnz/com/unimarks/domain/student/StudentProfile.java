@@ -47,11 +47,12 @@ public class StudentProfile implements Serializable {
 
     public static class Builder {
 
+        public long id;
         public String name;
         public String classGroup;
         public String surname;
         public String cellphone;
-        public long id;
+
 
         public Builder setId(long id) {
 

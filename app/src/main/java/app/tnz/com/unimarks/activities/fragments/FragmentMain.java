@@ -123,7 +123,7 @@ public class FragmentMain extends Fragment {
                 default:
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(App.getAppContext(), "\n Please check your internet connection \n", Toast.LENGTH_SHORT).show();
         }
     }
 
